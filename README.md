@@ -18,3 +18,22 @@ possible. Cheap, hacky collision detection is fine.
 
 However I did get the two players going right off the bat and get them
 jumping pretty quickly which felt good.
+
+## Getting Started ##
+
+    > yarn
+    > yarn start
+
+Player 1 is the red box, player 2 is the green box.
+
+Player 1 controls are
+
+* W: Jump
+* A: Move left
+* D: Move right
+
+Player 2 controls are
+
+* I: Jump
+* J: Move left
+* L: Move right
