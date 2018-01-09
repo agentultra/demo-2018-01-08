@@ -123,36 +123,6 @@ const landsOn = (player, platforms) => {
     return false
 }
 
-const checkPlayerCollisions = player => {
-    for (const platform of platforms) {
-        // check x collisions first
-        const rs = player.x + player.w // right side
-        , ls = player.x // left side
-        for (let cx = 0; cx < player.dx; cx++) {
-            if (player.dx > 0) {
-                if (rs + cx >= platform.x) player.dx = 0
-            } else if (player.dx < 0) {
-                if (ls - cx <= platform.x + platform.w) player.dx = 0
-            }
-        }
-        // check y collisions next
-        const bs = player.y + player.h // bottom side
-        , ts = player.x // top side
-        for (let cy = 0; cy < player.dy; cy++) {
-            if (player.dy > 0) {
-                if (bs + cy >= platform.y) {
-                    player.dy = 0
-                    player.state = playerStates.STANDING
-                }
-            } else if (player.dy < 0) {
-                if (ts - cy >= platform.y + platform.h) {
-                    player.dy = playerStates.JUMPING // hack
-                }
-            }
-        }
-    }
-}
-
 const update = dt => {
     if (btn('P1_LEFT')) player1.dx = -player1.moveSpeed
     if (btn('P1_RIGHT')) player1.dx = player1.moveSpeed
@@ -176,14 +146,11 @@ const update = dt => {
             player.x = stageW
         }
         const playerBottom = player.y + player.h
-        checkPlayerCollisions(player)
-        if (playerBottom === stageH) {
+        if (landsOn(player, platforms) || playerBottom === stageH) {
             player.state = playerStates.STANDING
             player.dy = 0.0
         } else {
-            // a hack to make the player fall
-            // TODO: give the player a falling state
-            player.state = playerStates.JUMPING
+            player.state = playerStates.JUMPING //hack
         }
         if (player.state === playerStates.JUMPING)
             player.dy += 0.8
