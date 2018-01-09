@@ -1,0 +1,14 @@
+{
+  "name": "Joust!",
+  "version": "1.0.0",
+  "description": "A rapid prototype of Joust!",
+  "main": "index.js",
+  "author": "James King <james@agentultra.com>",
+  "license": "MIT",
+  "scripts": {
+      "start": "http-server src/ -o"
+  },
+  "devDependencies": {
+    "http-server": "^0.10.0"
+  }
+}
